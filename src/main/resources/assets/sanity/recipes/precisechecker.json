@@ -1,0 +1,25 @@
+{
+  "result": {
+    "item": "sanity:precisechecker"
+  },
+  "pattern": [
+    "gsg",
+    "scs",
+    "geg"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "g": {
+      "item": "minecraft:gold_ingot"
+    },
+    "s": {
+      "item": "sanity:spectergoo"
+    },
+    "c": {
+      "item": "sanity:checker"
+    },
+    "e": {
+      "item": "minecraft:emerald"
+    }
+  }
+}

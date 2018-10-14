@@ -1,0 +1,26 @@
+{
+  "result": {
+    "item": "sanity:checker"
+  },
+  "pattern": [
+    "sgs",
+    "srs",
+    "sds"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "s": {
+      "item": "minecraft:stone",
+      "data": 0
+    },
+    "g": {
+      "item": "minecraft:glass_pane"
+    },
+    "r": {
+      "item": "minecraft:redstone"
+    },
+    "d": {
+      "item": "minecraft:diamond"
+    }
+  }
+}

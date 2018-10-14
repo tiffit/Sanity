@@ -1,0 +1,17 @@
+{
+	"result": {
+		"item": "sanity:specterbread"
+	},
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "minecraft:bread"
+		},
+		{
+			"item": "sanity:spectergoo"
+		},
+		{
+			"item": "sanity:spectergoo"
+		}
+	]
+}
