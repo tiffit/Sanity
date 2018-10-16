@@ -9,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.tiffit.sanity.ConfigHelper;
 import net.tiffit.sanity.SanityCapability.SanityLevel;
 import net.tiffit.sanity.proxy.CommonProxy;
 
@@ -50,12 +51,16 @@ public class EyesConsequence implements IConsequence {
 	@Override
 	public double getChance(SanityLevel level) {
 		switch (level) {
+		case VERY_HEALTHY:
+			return ConfigHelper.spawn_rate_eyes_veryhealthy;
+		case HEALTHY:
+			return ConfigHelper.spawn_rate_eyes_healthy;
 		case DAMAGED:
-			return 1 / (20 * 60 * 3.0);
+			return ConfigHelper.spawn_rate_eyes_damaged;
 		case VERY_DAMAGED:
-			return 1 / (20 * 60 * 1.0);
+			return ConfigHelper.spawn_rate_eyes_verydamaged;
 		case INSANE:
-			return 1 / (20 * 60 * 0.25);
+			return ConfigHelper.spawn_rate_eyes_insane;
 		default:
 			return 0;
 		}
@@ -63,7 +68,7 @@ public class EyesConsequence implements IConsequence {
 
 	@Override
 	public int getCooldown() {
-		return 40;
+		return ConfigHelper.spawn_rate_eyes_cooldown;
 	}
 	
 }

@@ -9,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.config.Config;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
@@ -89,8 +90,13 @@ public class SanityEventHandler {
     @SubscribeEvent
     public static void onWakeUp(PlayerWakeUpEvent e){
     	if(!e.getEntityPlayer().world.isRemote){
-        	SanityCapability cap = e.getEntityPlayer().getCapability(SanityCapability.INSTANCE, null);
-        	cap.increaseSanity(20);
+    		SanityCapability cap = e.getEntityPlayer().getCapability(SanityCapability.INSTANCE, null);
+    		List<SanityModifier> mods = Sanity.getModifierValues(Sanity.MOD_MISC);
+    		for(SanityModifier mod : mods){
+    			if(mod.value.equals("sleep")){
+    				cap.increaseSanity(mod.amount);
+    			}
+    		}
     	}
     }
 }

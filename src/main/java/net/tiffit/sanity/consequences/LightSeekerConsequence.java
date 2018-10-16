@@ -11,6 +11,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.tiffit.sanity.ConfigHelper;
 import net.tiffit.sanity.SanityCapability.SanityLevel;
 import net.tiffit.sanity.entity.LightSeekerEntity;
 
@@ -71,12 +72,16 @@ public class LightSeekerConsequence implements IConsequence {
 	@Override
 	public double getChance(SanityLevel level) {
 		switch (level) {
+		case VERY_HEALTHY:
+			return ConfigHelper.spawn_rate_lightseeker_veryhealthy;
+		case HEALTHY:
+			return ConfigHelper.spawn_rate_lightseeker_healthy;
 		case DAMAGED:
-			return 1 / (20 * 60 * 45.0);
+			return ConfigHelper.spawn_rate_lightseeker_damaged;
 		case VERY_DAMAGED:
-			return 1 / (20 * 60 * 20.0);
+			return ConfigHelper.spawn_rate_lightseeker_verydamaged;
 		case INSANE:
-			return 1 / (20 * 60 * 5.0);
+			return ConfigHelper.spawn_rate_lightseeker_insane;
 		default:
 			return 0;
 		}
@@ -84,7 +89,7 @@ public class LightSeekerConsequence implements IConsequence {
 	
 	@Override
 	public int getCooldown() {
-		return 20*15;
+		return ConfigHelper.spawn_rate_lightseeker_cooldown;
 	}
 
 }

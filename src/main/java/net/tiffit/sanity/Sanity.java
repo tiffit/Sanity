@@ -1,5 +1,6 @@
 package net.tiffit.sanity;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +24,7 @@ import net.tiffit.sanity.proxy.CommonProxy;
 public class Sanity {
 	public static final String MODID = "sanity";
 	public static final String NAME = "Sanity";
-	public static final String VERSION = "1.0.0";
+	public static final String VERSION = "1.0.1";
 	public static final String DEPENDENCIES = "required-after:tiffitlib;";
 
 	public static Logger logger;
@@ -34,9 +35,12 @@ public class Sanity {
 	public static HashMap<String, List<SanityModifier>> SANITY_MODIFIERS = new HashMap<>();
 	public static final String MOD_KILL = "kill";
 	public static final String MOD_EAT = "eat";
+	public static final String MOD_MISC = "misc";
 	
 	@Instance(MODID)
 	public static Sanity INSTANCE;
+	
+	public static File CONFIG_DIR;
 	
 	public static CreativeTabs CTAB = new CreativeTabs("sanity") {
 
@@ -51,6 +55,9 @@ public class Sanity {
 	public void preInit(FMLPreInitializationEvent e) {
 		logger = e.getModLog();
 		proxy.preInit(e);
+		File configs = e.getModConfigurationDirectory();
+		CONFIG_DIR = new File(configs, MODID);
+		if(!CONFIG_DIR.exists())CONFIG_DIR.mkdir();
 	}
 
 	@EventHandler
@@ -87,6 +94,9 @@ public class Sanity {
 		addModifier(MOD_EAT, new SanityModifier("minecraft:rotten_flesh", -3f));
 		addModifier(MOD_EAT, new SanityModifier("minecraft:spider_eye", -5f));
 		addModifier(MOD_EAT, new SanityModifier("sanity:specterbread", -20f));
+		
+		addModifier(MOD_MISC, new SanityModifier("sleep", 20f));
+		ConfigHelper.loadModifierMap(SANITY_MODIFIERS);
 	}
 	
 	public static void addModifier(String type, SanityModifier value){
