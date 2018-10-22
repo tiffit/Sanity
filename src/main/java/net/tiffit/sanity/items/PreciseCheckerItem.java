@@ -25,7 +25,7 @@ public class PreciseCheckerItem extends Item {
 	public ActionResult<ItemStack> onItemRightClick(World w, EntityPlayer p, EnumHand h) {
 		if(!w.isRemote){
 			SanityCapability cap = p.getCapability(SanityCapability.INSTANCE, null);
-			p.sendMessage(new TextComponentString(TextFormatting.GOLD + "Mental State: " + cap.getSanity().toColoredString() + " [" + cap.getSanityExact() + "]"));
+			p.sendMessage(new TextComponentString(TextFormatting.GOLD + "Mental State: " + cap.getSanity().toColoredString() + " [" + ItemStack.DECIMALFORMAT.format(cap.getSanityExact()) + "]"));
 		}
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, p.getHeldItem(h));
 	}

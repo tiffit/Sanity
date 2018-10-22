@@ -24,7 +24,7 @@ import net.tiffit.sanity.proxy.CommonProxy;
 public class Sanity {
 	public static final String MODID = "sanity";
 	public static final String NAME = "Sanity";
-	public static final String VERSION = "1.0.1";
+	public static final String VERSION = "1.0.2";
 	public static final String DEPENDENCIES = "required-after:tiffitlib;";
 
 	public static Logger logger;
@@ -36,6 +36,7 @@ public class Sanity {
 	public static final String MOD_KILL = "kill";
 	public static final String MOD_EAT = "eat";
 	public static final String MOD_MISC = "misc";
+	public static final String MOD_DIMENSION = "dimension";
 	
 	@Instance(MODID)
 	public static Sanity INSTANCE;
@@ -68,34 +69,38 @@ public class Sanity {
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent e) {
 		proxy.postInit(e);
-		addModifier(MOD_KILL, new SanityModifier("minecraft:chicken", -.4f));
-		addModifier(MOD_KILL, new SanityModifier("minecraft:bat", -.25f));
-		addModifier(MOD_KILL, new SanityModifier("minecraft:villager", -5));
-		addModifier(MOD_KILL, new SanityModifier("minecraft:zombie_villager", -2.5f));
-		addModifier(MOD_KILL, new SanityModifier("minecraft:pig", -.5f));
-		addModifier(MOD_KILL, new SanityModifier("minecraft:sheep", -.5f));
-		addModifier(MOD_KILL, new SanityModifier("minecraft:cow", -.5f));
-		addModifier(MOD_KILL, new SanityModifier("minecraft:mooshroom", -1f));
-		addModifier(MOD_KILL, new SanityModifier("minecraft:horse", -1f));
-		addModifier(MOD_KILL, new SanityModifier("minecraft:donkey", -1f));
-		addModifier(MOD_KILL, new SanityModifier("minecraft:llama", -.8f));
-		addModifier(MOD_KILL, new SanityModifier("minecraft:mule", -1.2f));
-		addModifier(MOD_KILL, new SanityModifier("minecraft:ocelot", -1.5f));
-		addModifier(MOD_KILL, new SanityModifier("minecraft:wolf", -2f));
-		addModifier(MOD_KILL, new SanityModifier("minecraft:parrot", -1f));
-		addModifier(MOD_KILL, new SanityModifier("minecraft:rabbit", -.7f));
-		addModifier(MOD_KILL, new SanityModifier("minecraft:squid", -.1f));
+		addModifier(MOD_KILL, new SanityModifier("minecraft:chicken", -.75f));
+		addModifier(MOD_KILL, new SanityModifier("minecraft:bat", -.2f));
+		addModifier(MOD_KILL, new SanityModifier("minecraft:villager", -7.5f));
+		addModifier(MOD_KILL, new SanityModifier("minecraft:zombie_villager", -3f));
+		addModifier(MOD_KILL, new SanityModifier("minecraft:pig", -1f));
+		addModifier(MOD_KILL, new SanityModifier("minecraft:sheep", -1f));
+		addModifier(MOD_KILL, new SanityModifier("minecraft:cow", -1f));
+		addModifier(MOD_KILL, new SanityModifier("minecraft:mooshroom", -2f));
+		addModifier(MOD_KILL, new SanityModifier("minecraft:horse", -2f));
+		addModifier(MOD_KILL, new SanityModifier("minecraft:donkey", -2f));
+		addModifier(MOD_KILL, new SanityModifier("minecraft:llama", -1.5f));
+		addModifier(MOD_KILL, new SanityModifier("minecraft:mule", -2f));
+		addModifier(MOD_KILL, new SanityModifier("minecraft:ocelot", -2f));
+		addModifier(MOD_KILL, new SanityModifier("minecraft:wolf", -3f));
+		addModifier(MOD_KILL, new SanityModifier("minecraft:parrot", -2f));
+		addModifier(MOD_KILL, new SanityModifier("minecraft:rabbit", -.75f));
+		addModifier(MOD_KILL, new SanityModifier("minecraft:squid", -.2f));
 		
-		addModifier(MOD_EAT, new SanityModifier("minecraft:mushroom_stew", .2f));
-		addModifier(MOD_EAT, new SanityModifier("minecraft:golden_apple", 3f));
+		addModifier(MOD_EAT, new SanityModifier("minecraft:mushroom_stew", -.6f));
+		addModifier(MOD_EAT, new SanityModifier("minecraft:golden_apple", 4f));
 		addModifier(MOD_EAT, new SanityModifier("minecraft:cookie", .15f));
-		addModifier(MOD_EAT, new SanityModifier("minecraft:pumpkin_pie", .75f));
-		addModifier(MOD_EAT, new SanityModifier("minecraft:beetroot_soup", 1f));
-		addModifier(MOD_EAT, new SanityModifier("minecraft:rotten_flesh", -3f));
-		addModifier(MOD_EAT, new SanityModifier("minecraft:spider_eye", -5f));
+		addModifier(MOD_EAT, new SanityModifier("minecraft:pumpkin_pie", .6f));
+		addModifier(MOD_EAT, new SanityModifier("minecraft:beetroot_soup", .6f));
+		addModifier(MOD_EAT, new SanityModifier("minecraft:rotten_flesh", -7f));
+		addModifier(MOD_EAT, new SanityModifier("minecraft:spider_eye", -10f));
 		addModifier(MOD_EAT, new SanityModifier("sanity:specterbread", -20f));
 		
-		addModifier(MOD_MISC, new SanityModifier("sleep", 20f));
+		addModifier(MOD_MISC, new SanityModifier("sleep", 10));
+		addModifier(MOD_MISC, new SanityModifier("fish", 0.25f));
+		
+		addModifier(MOD_DIMENSION, new SanityModifier("nether", -(1f/(20*60)*0.1f)));
+		addModifier(MOD_DIMENSION, new SanityModifier("midnight", -(1f/(20*60)*0.2f)));
 		ConfigHelper.loadModifierMap(SANITY_MODIFIERS);
 	}
 	

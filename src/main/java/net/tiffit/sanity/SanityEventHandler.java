@@ -13,6 +13,7 @@ import net.minecraftforge.common.config.Config;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
+import net.minecraftforge.event.entity.player.ItemFishedEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -88,12 +89,38 @@ public class SanityEventHandler {
     }
     
     @SubscribeEvent
+    public static void onExistInDimension(PlayerTickEvent e){
+    	if(e.side == Side.CLIENT || e.phase == Phase.START)return;
+    	String dimname = e.player.world.provider.getDimensionType().getName();
+    	SanityCapability cap = e.player.getCapability(SanityCapability.INSTANCE, null);
+    	List<SanityModifier> mods = Sanity.getModifierValues(Sanity.MOD_DIMENSION);
+		for(SanityModifier mod : mods){
+			if(dimname.equals(mod.value)){
+				cap.increaseSanity(mod.amount);
+			}
+		}
+    }
+    
+    @SubscribeEvent
     public static void onWakeUp(PlayerWakeUpEvent e){
     	if(!e.getEntityPlayer().world.isRemote){
     		SanityCapability cap = e.getEntityPlayer().getCapability(SanityCapability.INSTANCE, null);
     		List<SanityModifier> mods = Sanity.getModifierValues(Sanity.MOD_MISC);
     		for(SanityModifier mod : mods){
     			if(mod.value.equals("sleep")){
+    				cap.increaseSanity(mod.amount);
+    			}
+    		}
+    	}
+    }
+    
+    @SubscribeEvent
+    public static void onFish(ItemFishedEvent e){
+    	if(!e.getEntityPlayer().world.isRemote){
+    		SanityCapability cap = e.getEntityPlayer().getCapability(SanityCapability.INSTANCE, null);
+    		List<SanityModifier> mods = Sanity.getModifierValues(Sanity.MOD_MISC);
+    		for(SanityModifier mod : mods){
+    			if(mod.value.equals("fish")){
     				cap.increaseSanity(mod.amount);
     			}
     		}

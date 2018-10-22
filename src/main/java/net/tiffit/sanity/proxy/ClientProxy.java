@@ -64,10 +64,10 @@ public class ClientProxy extends CommonProxy {
 				float amount = mod.amount;
 				if(amount == 0)continue;
 				float abs = Math.abs(amount);
-				if(abs >= 10f) type = "immensely";
-				else if(abs >= 5f) type = "extremely";
-				else if(abs >= 1f) type = "very";
-				else if(abs >= .5f)type = "";
+				if(abs >= 15f) type = "immensely";
+				else if(abs >= 7f) type = "extremely";
+				else if(abs >= 3f) type = "very";
+				else if(abs >= 1f)type = "";
 				else type = "slightly";
 				type += " ";
 				if(amount < 0)type += "bad";
