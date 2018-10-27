@@ -64,6 +64,8 @@ public class ConfigHelper {
 	public static double spawn_rate_eyes_insane = 1 / (20 * 60 * 0.25);
 	@RangeInt(min = 0)
 	public static int spawn_rate_eyes_cooldown = 40;
+	
+	public static boolean keep_sanity_on_death = true;
 
 	public static void loadModifierMap(HashMap<String, List<SanityModifier>> map){
 		try {

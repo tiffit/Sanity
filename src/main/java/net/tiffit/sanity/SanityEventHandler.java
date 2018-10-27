@@ -9,11 +9,11 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.config.Config;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.player.ItemFishedEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -33,6 +33,15 @@ public class SanityEventHandler {
     public static void attachCap(AttachCapabilitiesEvent<Entity> e){
     	if(e.getObject() instanceof EntityPlayer){
     		e.addCapability(new ResourceLocation(Sanity.MODID, "sanity"), new SanityCapabilityProvider());
+    	}
+    }
+    
+    @SubscribeEvent
+    public static void onPlayerClone(PlayerEvent.Clone e){
+    	if(!e.getEntityPlayer().world.isRemote && e.isWasDeath() && ConfigHelper.keep_sanity_on_death){
+    		SanityCapability old = e.getOriginal().getCapability(SanityCapability.INSTANCE, null);
+    		SanityCapability newCap = e.getEntityPlayer().getCapability(SanityCapability.INSTANCE, null);
+    		SanityCapability.INSTANCE.readNBT(newCap, null, SanityCapability.INSTANCE.writeNBT(old, null));
     	}
     }
     
